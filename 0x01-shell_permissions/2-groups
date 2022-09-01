@@ -1,2 +1,2 @@
 #!/bin/bash
-groups username
+id -Gn userName
