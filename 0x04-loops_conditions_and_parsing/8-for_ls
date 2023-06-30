@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#prints content of current directory
+
+for entry in *
+do
+	echo "$entry" | cut -f 2- -d '-'
+done
