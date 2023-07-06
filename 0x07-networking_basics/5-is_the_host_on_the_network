@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#pings an IP address passed as an argument.
+IP ="$1"
+
+if ! ["$IP"]; then
+	echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
+else
+	ping -n 5 "${IP}"
