@@ -1,0 +1,23 @@
+#!/usr/env bash
+#!/usr/bin/env bash
+#redirection using sed
+apt-get update
+apt-get -y install nginx
+sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+
+echo "server {
+  listen 80;
+  server_name_;
+
+  location /redirect_me {
+    return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+  }
+
+  location / {
+    root /var/www/html;
+    index index.html;
+  }
+}" | tee /etc/nginx/sites-available/default > /dev/null
+
+service nginx restart
+echo "Nginx redirection configured successfully."
