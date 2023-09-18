@@ -17,7 +17,7 @@ echo "server {
     root /var/www/html;
     index index.html;
   }
-}" | tee /etc/nginx/sites-available/default > /dev/null
+}" | sudo tee /etc/nginx/sites-available/default > /dev/null
 
 service nginx restart
 echo "Nginx redirection configured successfully."
