@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+#how to change default apache text
+
+echo "Hello Holberton" > /var/www/html/index.html/
