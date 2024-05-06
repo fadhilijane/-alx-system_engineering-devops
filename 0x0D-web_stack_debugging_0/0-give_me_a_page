@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 #how to change default apache text
+docker exec -ti a1b3df6b5c1a /bin/bash
+a1b3df6b5c1a
 echo "Hello Holberton" > /var/www/html/index.html/
-service apache2 start
+service apache2 restart
