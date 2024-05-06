@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 #how to change default apache text
-docker exec -ti a1b3df6b5c1a /bin/bash
+docker exec -ti c86f4b37bcab /bin/bash
 echo "ServerName localhost" >> /etc/apache2/apache2.conf
 service apache2 restart
