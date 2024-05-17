@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#changing user
+
+if [ $# -ne 1 ]; then
+	echo "Usage: $0 <username>"
+	exit 1
+fi
+
+get_user="$1"
+sudo -u "$get_user" whoami
