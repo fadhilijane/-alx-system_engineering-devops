@@ -3,4 +3,4 @@
 
 Port=98
 
-nc -l -p $Port
+nc -l $Port
