@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # a Bash script that listens on port 98 on localhost
 
+set -e
+
 Port=98
 
-nc -l $Port
+nc -l -p $Port
