@@ -6,6 +6,6 @@ package {'python3-pip':
 
 exec {'install_flask':
   ensure  => '2.1.0',
-  command => 'install flask',
+  command => '/usr/bin/pip3 install flask',
   require => Package['python3-pip'],
 }
