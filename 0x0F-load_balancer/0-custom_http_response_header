@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# configure web-02 to be identical to web-01.
+#configure web-02 to be identical to web-01.
 
 FILE="/etc/nginx/sites-available/default"
 ERRORFILE="/usr/share/nginx/html/404error.html"
@@ -11,16 +11,16 @@ CUSTOMHEADER='\n\tadd_header X-Served-By $hostname;\n'
 STRING="Hello World!"
 FOUR="Ceci n'est pas une page"
 
-sudo apt-get -y update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-sudo echo "$STRING" > /var/www/html/index.nginx-debian.html
-sudo sed -i "37i\ $REDIRECT" "$FILE"
+apt-get -y update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+bash -c "echo '$STRING' > /var/www/html/index.nginx-debian.html"
+sed -i "37i\ $REDIRECT" "$FILE"
 
-sudo echo "$FOUR" > "$ERRORFILE"
-sudo sed -i "37i\ $ERRORREDIRECT" "$FILE"
+bash -c "echo '$FOUR' > '$ERRORFILE'"
+sed -i "37i\ $ERRORREDIRECT" "$FILE"
 
-sudo sed -i "37i\ $CUSTOMHEADER" "$FILE"
-sudo service nginx restart
+sed -i "37i\ $CUSTOMHEADER" "$FILE"
+service nginx restart
 
-echo "Nginx has been configured with a custom X-Served-By header."
+echo "Nginx has been configured with a custom X-Served-By $CUSTOMHEADER"
