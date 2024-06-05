@@ -23,4 +23,4 @@ sed -i "37i\ $ERRORREDIRECT" "$FILE"
 sed -i "37i\ $CUSTOMHEADER" "$FILE"
 service nginx restart
 
-echo "Nginx has been configured with a custom X-Served-By $CUSTOMHEADER"
+echo "Nginx has been configured with a custom X-Served-By header"
