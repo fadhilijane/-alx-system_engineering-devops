@@ -2,10 +2,10 @@
 #configure web-02 to be identical to web-01.
 
 FILE="/etc/nginx/sites-available/default"
-ERRORFILE="/usr/share/nginx/html/404error.html"
+ERRORFILE="/var/www/html/404.html"
 
 REDIRECT="\n\tlocation /redirect_me {\n\t\treturn 301 https://youtu.be/dQw4w9WgXcQ;\n\t}\n"
-ERRORREDIRECT="\n\terror_page 404 /404error.html;\n\tlocation = /404error.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}\n"
+ERRORREDIRECT="\n\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}\n"
 CUSTOMHEADER='\n\tadd_header X-Served-By $hostname;\n'
 
 STRING="Hello World!"
