@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #installing haproxy
 
-apt update
-apt install haproxy -y
+sudo apt update
+sudo apt install haproxy -y
 
 #distributing the traffic to the servers
 cat <<EOL | sudo tee /etc/haproxy/haproxy.cfg/
@@ -35,7 +35,7 @@ backend servers
     server 119370-web-02 54.87.157.65:80 check
 EOL
 
-sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
-service haproxy restart
-haproxy -c -v -f /etc/haproxy/haproxy.cfg
+sudo sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
+sudo service haproxy restart
+sudo haproxy -c -v -f /etc/haproxy/haproxy.cfg
 echo "HAProxy has been installed and configured successfully."
