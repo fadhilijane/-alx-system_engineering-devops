@@ -2,10 +2,10 @@
 #installing haproxy
 
 sudo apt update
-sudo apt install haproxy -y
+sudo apt install -y haproxy
 
 #distributing the traffic to the servers
-cat <<EOL | sudo tee /etc/haproxy/haproxy.cfg/
+cat <<EOL | sudo nano /etc/haproxy/haproxy.cfg/
 global
     log /dev/log local0
     log /dev/log local1 notice
@@ -37,5 +37,5 @@ EOL
 
 sudo sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
 sudo service haproxy restart
-sudo haproxy -c -v -f /etc/haproxy/haproxy.cfg
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
 echo "HAProxy has been installed and configured successfully."
