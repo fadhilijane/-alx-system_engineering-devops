@@ -5,17 +5,17 @@ sudo apt update
 sudo apt install -y haproxy
 
 #distributing the traffic to the servers
-echo "ENABLED=1" >> /etc/default/haproxy
-echo
-"frontend http-in
+sudo sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
+cat <<EOL | sudo tee /etc/haproxy/haproxy.cfg
+frontend http-in
     bind *:80
     default_backend servers
 
 backend servers
     balance roundrobin
     server 119370-web-01 100.26.200.73:80 check
-    server 119370-web-02 54.87.157.65:80 check" >> /etc/haproxy/haproxy.cfg
-
+    server 119370-web-02 54.87.157.65:80 check
+EOL
 sudo haproxy -c -f /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
 echo "HAProxy has been installed and configured successfully."
