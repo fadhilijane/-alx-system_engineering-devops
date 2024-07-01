@@ -36,6 +36,67 @@ backend servers
     server 119370-web-02 3.85.54.236:80 check
 EOL
 
+cat <<'EOT' > /etc/init.d/haproxy
+#!/usr/bin/env bash
+### BEGIN INIT INFO
+# Provides:          haproxy
+# Required-Start:    $network $remote_fs $syslog
+# Required-Stop:     $network $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: HA-Proxy is a TCP/HTTP reverse proxy
+# Description:       HA-Proxy is a TCP/HTTP reverse proxy which is particularly suited
+#                    for high availability environments.
+### END INIT INFO
+
+DAEMON=/usr/sbin/haproxy
+PIDFILE=/var/run/haproxy.pid
+CFGFILE=/etc/haproxy/haproxy.cfg
+EXTRAOPTS=
+LOGFILE=/var/log/haproxy.log
+
+[ -x $DAEMON ] || exit 0
+
+set -e
+
+case "$1" in
+  start)
+    echo -n "Starting haproxy: "
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- -f $CFGFILE $EXTRAOPTS
+    echo "haproxy."
+    ;;
+  stop)
+    echo -n "Stopping haproxy: "
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    echo "haproxy."
+    ;;
+  reload|force-reload)
+    echo -n "Reloading haproxy: "
+    start-stop-daemon --stop --signal HUP --quiet --pidfile $PIDFILE
+    echo "haproxy."
+    ;;
+  restart)
+    echo -n "Restarting haproxy: "
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    sleep 1
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- -f $CFGFILE $EXTRAOPTS
+    echo "haproxy."
+    ;;
+  status)
+    status_of_proc -p $PIDFILE $DAEMON haproxy && exit 0 || exit $?
+    ;;
+  *)
+    N=/etc/init.d/haproxy
+    echo "Usage: $N {start|stop|restart|reload|force-reload|status}" >&2
+    exit 1
+    ;;
+esac
+
+exit 0
+EOT
+
+# Make the init script executable
+sudo chmod +x /etc/init.d/haproxy
 sudo service haproxy start
 
 sudo haproxy -c -V -f /etc/haproxy/haproxy.cfg
