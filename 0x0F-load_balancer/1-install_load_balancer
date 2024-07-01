@@ -6,26 +6,8 @@ sudo apt install -y haproxy
 
 #distributing the traffic to the servers
 echo "ENABLED=1" > /etc/default/haproxy
-echo "global
-    log /dev/log local0
-    log /dev/log local1 notice
-    chroot /var/lib/haproxy
-    stats socket /run/haproxy/admin.sock mode 660 level admin
-    stats timeout 30s
-    user haproxy
-    group haproxy
-    daemon
-
-defaults
-    log global
-    mode http
-    option httplog
-    option dontlognull
-    timeout connect 5000
-    timeout client 50000
-    timeout server 50000
-
-frontend http-in
+sudo echo
+"frontend http-in
     bind *:80
     default_backend servers
 
@@ -34,6 +16,6 @@ backend servers
     server 119370-web-01 100.26.200.73:80 check
     server 119370-web-02 54.87.157.65:80 check" >> /etc/haproxy/haproxy.cfg
 
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
-sudo haproxy -c -v -f /etc/haproxy/haproxy.cfg
 echo "HAProxy has been installed and configured successfully."
