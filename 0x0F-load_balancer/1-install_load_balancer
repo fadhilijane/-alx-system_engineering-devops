@@ -35,6 +35,9 @@ backend servers
     server 119370-web-01 100.26.200.73:80 check
     server 119370-web-02 3.85.54.236:80 check
 EOL
+
+sudo service haproxy start
+
 sudo haproxy -c -f /etc/haproxy/haproxy.cfg
-sudo service haproxy restart
+
 echo "HAProxy has been installed and configured successfully."
