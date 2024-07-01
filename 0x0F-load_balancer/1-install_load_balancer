@@ -38,6 +38,6 @@ EOL
 
 sudo service haproxy start
 
-sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+sudo haproxy -c -V -f /etc/haproxy/haproxy.cfg
 
 echo "HAProxy has been installed and configured successfully."
