@@ -5,8 +5,8 @@ sudo apt update
 sudo apt install -y haproxy
 
 #distributing the traffic to the servers
-echo "ENABLED=1" > /etc/default/haproxy
-sudo echo
+echo "ENABLED=1" >> /etc/default/haproxy
+echo
 "frontend http-in
     bind *:80
     default_backend servers
