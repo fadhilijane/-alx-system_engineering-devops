@@ -33,7 +33,7 @@ frontend http-in
 backend servers
     balance roundrobin
     server 119370-web-01 100.26.200.73:80 check
-    server 119370-web-02 54.87.157.65:80 check
+    server 119370-web-02 3.85.54.236:80 check
 EOL
 sudo haproxy -c -f /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
